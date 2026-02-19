@@ -1,9 +1,8 @@
-export default function HomePage() {
+export default function Home() {
   return (
-    <main>
-      <h1>
-        Hello World
-      </h1>
-    </main>
+<div className="bg-greenPrimary text-white p-10">
+  Test tailwind
+</div>
+
   );
 }
