@@ -35,6 +35,7 @@ const config = {
                 caption: ["12px", { lineHeight: "21px", fontWeight: "400" }],
                 label: ["14px", { lineHeight: "18px", fontWeight: "600" }],
                 input: ["14px", { lineHeight: "21px", fontWeight: "500" }],
+                selectInput: ["14px", { lineHeight: "18px", fontWeight: "400" }],
                 'card-number': ["21.49px", { lineHeight: "100%", fontWeight: "500" }],
                 'card-name': ["12.62px", { lineHeight: "100%", fontWeight: "500" }],
                 'card-expire': ["7.18px", { lineHeight: "100%", fontWeight: "500" }],

@@ -49,7 +49,7 @@ export default function Page() {
                 <div className="flex flex-wrap gap-6">
                     {isLoadingBank ? (
                         [1].map((i) => (
-                            <div key={i} style={{ width: '353.35px', height: '208.46px' }} className="bg-gray-200 animate-pulse rounded-[15px]" />
+                            <div key={i} className="bg-gray-200 animate-pulse rounded-card w-card h-card" />
                         ))
                     ) : (
                         accounts?.map((acc, index) => (
