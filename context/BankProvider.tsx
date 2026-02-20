@@ -19,6 +19,7 @@ export const BankProvider = ({ children }: { children: React.ReactNode }) => {
     const [error, setError] = useState<string | null>(null);
 
     /**
+PS C:\Users\alexa\OneDrive\Desktop\Prueba Técnica\frontend> 
      * Fetches user profile and account details from the API.
      * Uses sequential requests to ensure data consistency.
      */

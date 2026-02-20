@@ -1,9 +1,7 @@
-export default function HomePage() {
+export default function Page() {
     return (
-        <main>
-            <h1>
-                Dashboard
-            </h1>
-        </main>
+        <div>
+            <h1>Dashboard</h1>
+        </div>
     );
 }
