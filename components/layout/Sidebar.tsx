@@ -12,6 +12,8 @@ import CheckIconComponent from '@/components/icons/CheckIconComponent';
 import PaynetIconComponent from '@/components/icons/PaynetIconComponent';
 import SavingsIconComponent from '@/components/icons/SavingsIconComponent';
 import SettingsIconComponent from '@/components/icons/SettingsIconComponent';
+import { SelectInputSmall } from '@/components/ui/SelectInputSmall';
+import ChangeIconComponent from "@/components/icons/ChangeIconComponent";
 import { useState } from 'react';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
@@ -27,6 +29,12 @@ const ICON_MAP: Record<string, React.ComponentType<any>> = {
     savings: SavingsIconComponent,
     settings: SettingsIconComponent,
 };
+
+const CURRENCY_OPTIONS = [
+    { value: "NIO", label: "Córdoba" },
+    { value: "USD", label: "USD" },
+    { value: "EUR", label: "Euro" },
+];
 
 interface SidebarItem {
     label: string;
@@ -50,96 +58,83 @@ export default function Sidebar({ logo, items }: SidebarProps) {
     };
 
     return (
-        <aside className="fixed left-0 top-0 w-70 h-screen bg-sidebarBg border-r border-gray-200 flex flex-col p-6 gap-2 z-30">
-            <div className="mb-10 px-2 flex justify-center">
-                {logo}
-            </div>
+        <aside className="fixed left-0 top-0 w-70 h-screen bg-sidebarBg border-r border-gray-200 flex flex-col p-6 z-30">
+            <div className="flex-1 overflow-y-auto overflow-x-hidden no-scrollbar flex flex-col gap-2">
 
-            <nav className="flex-1 flex flex-col gap-1">
-                {items.map((item) => {
-                    const isActive = pathname === item.href;
-                    const Icon = ICON_MAP[item.iconName] || DashboardIconComponent;
+                <div className="mb-10 px-2 flex justify-center shrink-0">
+                    {logo}
+                </div>
 
-                    return (
-                        <Link
-                            key={item.href}
-                            href={item.href}
-                            className={`flex items-center justify-between px-4 py-3 rounded-lg transition-all duration-200
-                                ${isActive ? "bg-greenPastel text-greenLight" : "text-primary hover:bg-gray-100"}
-                            `}
-                        >
-                            <div className="flex items-center gap-3">
-                                <Icon
-                                    width={22}
-                                    height={22}
-                                    fill="currentColor"
-                                    className={isActive ? "text-greenLight" : "text-primary"}
-                                />
-                                <span className={`text-sidebarBase ${isActive ? "font-semibold" : "font-medium"}`}>
-                                    {item.label}
+                <nav className="flex flex-col gap-1 shrink-0">
+                    {items.map((item) => {
+                        const isActive = pathname === item.href;
+                        const Icon = ICON_MAP[item.iconName] || DashboardIconComponent;
+
+                        return (
+                            <Link
+                                key={item.href}
+                                href={item.href}
+                                className={`flex items-center justify-between px-4 py-3 rounded-lg transition-all duration-200
+                            ${isActive ? "bg-greenPastel text-greenLight" : "text-primary hover:bg-gray-100"}
+                        `}
+                            >
+                                <div className="flex items-center gap-3">
+                                    <Icon
+                                        width={22}
+                                        height={22}
+                                        fill="currentColor"
+                                        className={isActive ? "text-greenLight" : "text-primary"}
+                                    />
+                                    <span className={`text-sidebarBase ${isActive ? "font-semibold" : "font-medium"}`}>
+                                        {item.label}
+                                    </span>
+                                </div>
+                                <span className={`text-lg ${isActive ? "text-greenLight" : "text-gray-300"}`}>
+                                    ›
                                 </span>
-                            </div>
-                            <span className={`text-lg ${isActive ? "text-greenLight" : "text-gray-300"}`}>
-                                ›
-                            </span>
-                        </Link>
-                    );
-                })}
-            </nav>
+                            </Link>
+                        );
+                    })}
+                </nav>
+                <div className="border-t border-gray-200 pt-6 mt-6 shrink-0">
+                    <h3 className="text-bodyMedium text-black mb-4 font-bold">Tasa de cambio</h3>
 
-            <div className="border-t border-gray-200 pt-6 mt-auto">
-                <h3 className="text-bodyMedium text-black mb-4 font-bold">Tasa de cambio</h3>
-
-                <div className="flex gap-2 mb-4">
-                    <div className="relative flex-1">
-                        <select
+                    <div className="flex gap-2 mb-4">
+                        <SelectInputSmall
                             value={fromCurrency}
-                            onChange={(e) => setFromCurrency(e.target.value)}
-                            className="w-full appearance-none px-3 py-2 border border-gray-200 rounded-xl text-[12px] font-semibold text-primary bg-gray-50 hover:bg-white transition-colors cursor-pointer outline-none focus:ring-1 focus:ring-greenLight"
-                        >
-                            <option value="NIO">Córdoba</option>
-                            <option value="USD">USD</option>
-                            <option value="EUR">Euro</option>
-                        </select>
-                        <span className="absolute right-2 top-2.5 pointer-events-none text-[10px] text-gray-400">▼</span>
-                    </div>
-
-                    <div className="relative flex-1">
-                        <select
+                            onChange={setFromCurrency}
+                            options={CURRENCY_OPTIONS}
+                        />
+                        <SelectInputSmall
                             value={toCurrency}
-                            onChange={(e) => setToCurrency(e.target.value)}
-                            className="w-full appearance-none px-3 py-2 border border-gray-200 rounded-xl text-[12px] font-semibold text-primary bg-gray-50 hover:bg-white transition-colors cursor-pointer outline-none focus:ring-1 focus:ring-greenLight"
+                            onChange={setToCurrency}
+                            options={CURRENCY_OPTIONS}
+                        />
+                    </div>
+
+                    <div className="flex items-center justify-between mb-4 p-3 rounded-2xl">
+                        <div className="flex flex-col">
+                            <span className="text-bodymedium text-black font-bold">{fromCurrency}: 35.10</span>
+                        </div>
+
+                        <div
+                            onClick={handleSwap}
+                            className="cursor-pointer transition-transform active:scale-90"
                         >
-                            <option value="USD">USD</option>
-                            <option value="NIO">Córdoba</option>
-                            <option value="EUR">Euro</option>
-                        </select>
-                        <span className="absolute right-2 top-2.5 pointer-events-none text-[10px] text-gray-400">▼</span>
-                    </div>
-                </div>
+                            <ChangeIconComponent width={32} height={32} />
+                        </div>
 
-                <div className="flex items-center justify-between mb-4 bg-gray-50 p-3 rounded-2xl border border-gray-100">
-                    <div className="flex flex-col">
-                        <span className="text-[10px] text-gray-400 font-bold uppercase">{fromCurrency}</span>
-                        <span className="text-[14px] text-black font-bold">35.10</span>
+                        <div className="flex flex-col text-right">
+                            <span className="text-bodymedium text-black font-bold">{toCurrency}: 35.95</span>
+                        </div>
                     </div>
 
-                    <button
-                        onClick={handleSwap}
-                        className="w-8 h-8 bg-greenLight hover:bg-green-700 rounded-full flex items-center justify-center text-white transition-transform active:scale-90 shadow-md"
-                    >
-                        <span className="text-sm font-bold">⇄</span>
-                    </button>
-
-                    <div className="flex flex-col text-right">
-                        <span className="text-[10px] text-gray-400 font-bold uppercase">{toCurrency}</span>
-                        <span className="text-[14px] text-black font-bold">35.95</span>
+                    <div className="border-t border-gray-200 pt-6 mb-4">
+                        <div className="text-caption text-black font-medium">
+                            <p>IP del Servidor: 190.432.574.23</p>
+                            <p>Último acceso: 2021/11/21 13:32:11</p>
+                        </div>
                     </div>
-                </div>
-
-                <div className="text-caption text-black font-medium">
-                    <p>IP del Servidor: 190.432.574.23</p>
-                    <p>Último acceso: 2021/11/21 13:32:11</p>
                 </div>
             </div>
         </aside>

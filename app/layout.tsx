@@ -2,7 +2,7 @@ import { BankProvider } from '@/context/BankProvider';
 import Sidebar from '@/components/layout/Sidebar';
 import Navbar from '@/components/layout/Navbar';
 import LogoComponent from '@/components/icons/LogoComponent';
-import { Poppins } from "next/font/google";
+import { Poppins, Lato, Quicksand } from "next/font/google";
 import './globals.css';
 
 const poppins = Poppins({
@@ -10,6 +10,16 @@ const poppins = Poppins({
   variable: "--font-poppins",
   weight: ["400", "500", "600"],
 });
+const lato = Lato({
+  subsets: ["latin"],
+  variable: "--font-lato",
+  weight: ["400", "700"], 
+});
+const quicksand = Quicksand({
+  subsets: ["latin"],
+  variable: "--font-quicksand",
+  weight: ["400", "500", "600"],
+}); 
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   const navItems = [
@@ -27,8 +37,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   ];
 
   return (
-    <html lang="es">
-      <body className={`${poppins.variable} font-sans bg-background antialiased`}>
+<html lang="es" className={`${poppins.variable} ${lato.variable} ${quicksand.variable}`}>
+      <body className="font-sans bg-background antialiased">
         <BankProvider>
           <div className="flex">
             <Sidebar 
