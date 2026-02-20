@@ -88,8 +88,7 @@ export function AccountCard({
                             >
                                 <CopyIconComponent className="w-4 h-4" />
                             </button>
-                            
-                            {/* Mensaje Flotante de Copiado */}
+
                             <span className={`
                                 absolute left-6 text-[10px] font-bold text-greenPrimary uppercase tracking-tighter
                                 transition-all duration-300 pointer-events-none

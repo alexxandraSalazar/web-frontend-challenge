@@ -1,2 +1,16 @@
 @config "../tailwind.config.js";
 @import "tailwindcss";
+
+@layer utilities {
+
+    /* Ocultar barra de scroll para Chrome, Safari y Opera */
+    .no-scrollbar::-webkit-scrollbar {
+        display: none;
+    }
+
+    /* Ocultar barra de scroll para IE, Edge y Firefox */
+    .no-scrollbar {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+    }
+}
