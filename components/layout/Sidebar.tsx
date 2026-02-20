@@ -14,7 +14,8 @@ import SavingsIconComponent from '@/components/icons/SavingsIconComponent';
 import SettingsIconComponent from '@/components/icons/SettingsIconComponent';
 import { useState } from 'react';
 
-const ICON_MAP: Record<string, unknown> = {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const ICON_MAP: Record<string, React.ComponentType<any>> = {
     dashboard: DashboardIconComponent,
     transfer: TransferIconComponent,
     history: HistoryIconComponent,
