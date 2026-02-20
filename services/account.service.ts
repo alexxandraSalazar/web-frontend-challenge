@@ -2,27 +2,27 @@ import { apiFetch } from "./api";
 import { Account, AccountTransactionResponse } from "@/types";
 
 /**
- * Retrieves account information by internal account number.
+ * Retrieves account information by account number.
  *
- * @param accountId 9–12 digit account identifier
+ * @param accountId Account internal number (9-12 digits)
  * @returns Account details including balance and currency
  */
 export const getAccountById = async (
-    accountId: string | number
+  accountId: string | number
 ): Promise<Account> => {
-    return apiFetch<Account>(`/accounts/${accountId}`);
+  return apiFetch<Account>(`/accounts/${accountId}`);
 };
 
 /**
- * Retrieves transactions associated with an account.
+ * Retrieves transactions associated with a specific account.
  *
  * @param accountId Account internal number
- * @returns Paginated list of transactions
+ * @returns Paginated transaction response
  */
 export const getAccountTransactions = async (
-    accountId: string | number
+  accountId: string | number
 ): Promise<AccountTransactionResponse> => {
-    return apiFetch<AccountTransactionResponse>(
-        `/accounts/${accountId}/transactions`
-    );
+  return apiFetch<AccountTransactionResponse>(
+    `/accounts/${accountId}/transactions`
+  );
 };

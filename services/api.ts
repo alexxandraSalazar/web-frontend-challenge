@@ -26,6 +26,7 @@ export async function apiFetch<T>(
         headers: {
             "Content-Type": "application/json",
         },
+        cache: "no-store",
         ...options,
     });
 

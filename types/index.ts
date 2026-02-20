@@ -62,3 +62,15 @@ export interface TransactionRequest {
     destination: string;
     amount: Amount;
 }
+
+
+/**
+ * Definition of the global banking state.
+ */
+export interface BankContextType {
+    user: UserInfo | null;
+    accounts: Account[];
+    isLoading: boolean;
+    error: string | null;
+    refreshData: () => Promise<void>;
+}
