@@ -2,6 +2,7 @@ import { BankProvider } from '@/context/BankProvider';
 import Sidebar from '@/components/layout/Sidebar';
 import Navbar from '@/components/layout/Navbar';
 import LogoComponent from '@/components/icons/LogoComponent';
+import ServerGuard from "@/components/ui/ServerGuard";
 import { Poppins, Lato, Quicksand } from "next/font/google";
 import './globals.css';
 
@@ -40,6 +41,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 <html lang="es" className={`${poppins.variable} ${lato.variable} ${quicksand.variable}`}>
       <body className="font-sans bg-background antialiased">
         <BankProvider>
+          <ServerGuard>
           <div className="flex">
             <Sidebar 
               logo={<LogoComponent />} 
@@ -52,6 +54,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               </main>
             </div>
           </div>
+          </ServerGuard>
         </BankProvider>
       </body>
     </html>

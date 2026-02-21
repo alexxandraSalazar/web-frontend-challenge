@@ -47,8 +47,7 @@ export const BankProvider = ({ children }: { children: React.ReactNode }) => {
                 setAccounts(tempAccounts);
             }
         } catch (err: unknown) {
-            console.error("BankProvider Error:", err);
-            setError("Could not sync banking data. Please try again later.");
+            setError(err.message || "Connection Error");
         } finally {
             setIsLoading(false);
         }
@@ -62,26 +61,26 @@ export const BankProvider = ({ children }: { children: React.ReactNode }) => {
     /**
      * Public method to refresh all data (e.g., after a transfer).
      */
-// Dentro del BankProvider
-// Dentro de BankProvider en su archivo de contexto
-const refreshData = async () => {
-    try {
-        setIsLoading(true);
-        await loadBankData(); // Recarga usuarios y balances reales de la API
-    } finally {
-        setIsLoading(false);
-    }
-};
+    // Dentro del BankProvider
+    // Dentro de BankProvider en su archivo de contexto
+    const refreshData = async () => {
+        try {
+            setIsLoading(true);
+            await loadBankData(); // Recarga usuarios y balances reales de la API
+        } finally {
+            setIsLoading(false);
+        }
+    };
 
-return (
-    <BankContext.Provider value={{
-        user,
-        accounts,
-        isLoading,
-        error,
-        refreshData // Ahora disponible para los componentes
-    }}>
-        {children}
-    </BankContext.Provider>
-);
+    return (
+        <BankContext.Provider value={{
+            user,
+            accounts,
+            isLoading,
+            error,
+            refreshData // Ahora disponible para los componentes
+        }}>
+            {children}
+        </BankContext.Provider>
+    );
 };
