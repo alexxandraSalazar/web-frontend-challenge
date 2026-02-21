@@ -74,3 +74,14 @@ export interface BankContextType {
     error: string | null;
     refreshData: () => Promise<void>;
 }
+
+export interface TransferFormData {
+    originAccount: string;
+    destinationAccount: string;
+    amount: string;
+    debit: string;
+    credit: string;
+    ref: string;
+    email: string;
+    type: string;
+}

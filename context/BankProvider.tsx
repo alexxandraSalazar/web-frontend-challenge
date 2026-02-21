@@ -62,19 +62,26 @@ export const BankProvider = ({ children }: { children: React.ReactNode }) => {
     /**
      * Public method to refresh all data (e.g., after a transfer).
      */
-    const refreshData = async () => {
-        await loadBankData();
-    };
+// Dentro del BankProvider
+// Dentro de BankProvider en su archivo de contexto
+const refreshData = async () => {
+    try {
+        setIsLoading(true);
+        await loadBankData(); // Recarga usuarios y balances reales de la API
+    } finally {
+        setIsLoading(false);
+    }
+};
 
-    return (
-        <BankContext.Provider value={{
-            user,
-            accounts,
-            isLoading,
-            error,
-            refreshData
-        }}>
-            {children}
-        </BankContext.Provider>
-    );
+return (
+    <BankContext.Provider value={{
+        user,
+        accounts,
+        isLoading,
+        error,
+        refreshData // Ahora disponible para los componentes
+    }}>
+        {children}
+    </BankContext.Provider>
+);
 };

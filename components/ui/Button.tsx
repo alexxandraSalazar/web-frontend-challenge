@@ -15,7 +15,7 @@ export default function Button({
     const variants = {
         primary: "bg-greenPrimary text-white hover:bg-greenLight",
         secondary: "bg-greenPastel text-greenLight hover:bg-greenLight hover:text-white",
-        outline: "border border-gray-200 text-primary hover:bg-gray-100"
+        outline: "border border-greenPrimary text-greenPrimary hover:bg-gray-100"
     };
 
     return (
