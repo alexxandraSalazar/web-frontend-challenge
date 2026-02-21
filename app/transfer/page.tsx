@@ -24,12 +24,15 @@ export default function HomePage() {
   const {
     currentStep, formData, loading, errorMsg,
     availableDestinations, updateForm, nextStep, prevStep
-  // eslint-disable-next-line react-hooks/rules-of-hooks
+    // eslint-disable-next-line react-hooks/rules-of-hooks
   } = useTransfer(context.accounts, context.refreshData);
 
   return (
-    <main className="min-h-screen p-8 bg-white font-lato">
-      <h2 className="text-[32px] mb-6 text-black font-bold font-poppins">Transferir</h2>
+    <main className="min-h-screen p-8 bg-white ">
+      <h1 className="text-h1 mb-8 text-black">
+        Tranferir
+      </h1>
+
 
       <div className="mx-1 h-[140px] bg-white border border-[#DFE1DF] rounded-t-[4px] flex items-center justify-center">
         <StepperComponent currentStep={currentStep} steps={STEPS} />
@@ -41,7 +44,7 @@ export default function HomePage() {
           variant="simple"
           value={formData.type}
           options={[{ id: "propias", label: "Cuentas Propias" }]}
-          onChange={(val) => updateForm({ type: val })} 
+          onChange={(val) => updateForm({ type: val })}
         />
         <SelectInputBig
           label="Cuenta origen"
@@ -56,7 +59,7 @@ export default function HomePage() {
       <div className="mx-1 bg-white border-x border-b border-[#DFE1DF] p-10 min-h-[400px] flex flex-col justify-between">
         <div className="flex flex-col items-center">
           {errorMsg && <p className="text-red-500 mb-4 font-bold">{errorMsg}</p>}
-          
+
           <div className="w-full flex justify-center pt-4">
             {currentStep === 1 && <p className="text-grayContent">Confirme su selección para continuar.</p>}
             {currentStep === 2 && <Step2Destination data={formData} update={updateForm} accounts={availableDestinations} />}
@@ -67,9 +70,9 @@ export default function HomePage() {
 
         <div className="flex justify-center gap-4 mt-12">
           <Button label="Atrás" variant="outline" onClick={prevStep} disabled={currentStep === 1 || loading} />
-          <Button 
-            label={loading ? "Enviando..." : currentStep === 4 ? "Finalizar" : "Continuar"} 
-            variant="primary" onClick={nextStep} disabled={loading} 
+          <Button
+            label={loading ? "Enviando..." : currentStep === 4 ? "Finalizar" : "Continuar"}
+            variant="primary" onClick={nextStep} disabled={loading}
           />
         </div>
       </div>
