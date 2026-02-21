@@ -14,13 +14,13 @@ const poppins = Poppins({
 const lato = Lato({
   subsets: ["latin"],
   variable: "--font-lato",
-  weight: ["400", "700"], 
+  weight: ["400", "700"],
 });
 const quicksand = Quicksand({
   subsets: ["latin"],
   variable: "--font-quicksand",
   weight: ["400", "500", "600"],
-}); 
+});
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   const navItems = [
@@ -38,22 +38,24 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   ];
 
   return (
-<html lang="es" className={`${poppins.variable} ${lato.variable} ${quicksand.variable}`}>
+    <html lang="es" className={`${poppins.variable} ${lato.variable} ${quicksand.variable}`}>
       <body className="font-sans bg-background antialiased">
         <BankProvider>
           <ServerGuard>
-          <div className="flex">
-            <Sidebar 
-              logo={<LogoComponent />} 
-              items={navItems} 
-            />
-            <div className="flex flex-col flex-1">
-              <Navbar />
-              <main className="ml-70 mt-16 p-8 min-h-screen bg-sidebarBg/30">
-                {children}
-              </main>
+            <div className="flex">
+              <Sidebar
+                logo={<LogoComponent />}
+                items={navItems}
+              />
+              <div className="flex flex-col flex-1 min-w-0">
+                <Navbar />
+                <main className="lg:ml-70 mt-16 p-4 md:p-8 min-h-screen bg-sidebarBg/30 transition-all duration-300 flex flex-col items-center lg:items-start">
+                  <div className="w-full max-w-7xl mx-auto">
+                    {children}
+                  </div>
+                </main>
+              </div>
             </div>
-          </div>
           </ServerGuard>
         </BankProvider>
       </body>

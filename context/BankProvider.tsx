@@ -46,8 +46,8 @@ export const BankProvider = ({ children }: { children: React.ReactNode }) => {
 
                 setAccounts(tempAccounts);
             }
-        } catch (err: unknown) {
-            setError(err.message || "Connection Error");
+        } catch (err) {
+            setError((err as Error).message || "Connection Error");
         } finally {
             setIsLoading(false);
         }

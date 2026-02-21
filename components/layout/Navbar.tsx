@@ -9,7 +9,7 @@ export default function Navbar() {
     const { user } = useBank();
 
     return (
-        <header className="fixed top-0 left-72 right-0 h-20 bg-background border-b border-gray-100 flex items-center justify-between px-8 z-20">
+        <header className="fixed top-0 left-0 lg:left-72 right-0 h-20 bg-background border-b border-gray-100 flex items-center justify-between px-4 md:px-8 z-20 transition-all duration-300">
             <button className="transition-opacity hover:opacity-80">
                 <BurguerMenuIconComponent width={24} height={24} />
             </button>
